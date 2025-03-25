@@ -339,9 +339,9 @@ export default function SpinWheel({ prizes = [], onWin, userId = 1 }) {
         }
 
         .wheel-title {
-          font-size: 2.5rem;
+          font-size: 2.2rem;
           font-weight: 800;
-          margin-bottom: 10px;
+          margin-bottom: 8px;
           background: ${currentTheme.primary};
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -362,9 +362,9 @@ export default function SpinWheel({ prizes = [], onWin, userId = 1 }) {
         }
 
         .wheel-subtitle {
-          font-size: 1.1rem;
+          font-size: 1rem;
           color: #888;
-          margin-bottom: 30px;
+          margin-bottom: 20px;
           font-weight: 500;
           max-width: 80%;
           margin-left: auto;
@@ -373,8 +373,8 @@ export default function SpinWheel({ prizes = [], onWin, userId = 1 }) {
 
         .wheel-container {
           position: relative;
-          width: 300px;
-          height: 300px;
+          width: 350px;
+          height: 350px;
           margin: 0 auto 30px;
           perspective: 1000px;
         }
@@ -416,61 +416,126 @@ export default function SpinWheel({ prizes = [], onWin, userId = 1 }) {
           }
         }
 
-        /* Add responsive styles for larger screens */
-        @media (min-width: 768px) {
-          .wheel-container {
-            width: 400px;
-            height: 400px;
-          }
-
-          .wheel-center {
-            width: 160px;
-            height: 160px;
-          }
-
-          .segment-text {
-            font-size: 18px;
-            max-width: 150px;
-            top: 40px;
-          }
-          
-          .wheel-title {
-            font-size: 3.5rem;
-          }
-          
-          .wheel-subtitle {
-            font-size: 1.3rem;
-          }
+        /* Add touch-friendly styles */
+        .wheel-center {
+          -webkit-tap-highlight-color: transparent;
+          touch-action: manipulation;
         }
 
-        /* Keep the existing mobile styles */
-        @media (max-width: 480px) {
-          .wheel-container {
-            width: 280px;
-            height: 280px;
-          }
+        .audio-toggle, .theme-switcher {
+          -webkit-tap-highlight-color: transparent;
+          touch-action: manipulation;
+        }
 
+        /* Optimize for mobile devices */
+        html, body {
+          overscroll-behavior: none;
+          touch-action: manipulation;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+          .spin-wheel-container {
+            padding: 10px;
+            max-width: 100%;
+          }
+          
+          .wheel-container {
+            width: 320px;
+            height: 320px;
+          }
+          
           .wheel-center {
             width: 100px;
             height: 100px;
           }
-
+          
           .segment-text {
-            font-size: 14px;
-            max-width: 120px;
-            top: 35px;
-          }
-
-          .victory-text {
-            font-size: 32px;
+            font-size: 11px;
+            max-width: 90px;
+            top: 30px;
+            left: 10px;
+            padding: 3px 6px;
           }
           
           .wheel-title {
-            font-size: 2rem;
+            font-size: 1.8rem;
           }
           
           .wheel-subtitle {
-            font-size: 1rem;
+            font-size: 0.9rem;
+          }
+          
+          .result-container {
+            padding: 20px;
+          }
+          
+          .result-prize {
+            font-size: 1.6rem;
+          }
+          
+          .victory-text {
+            font-size: 2.5rem;
+            padding: 15px 30px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .wheel-container {
+            width: 340px;
+            height: 340px;
+            margin-bottom: 20px;
+          }
+          
+          .wheel-center {
+            width: 90px;
+            height: 90px;
+          }
+          
+          .segment-text {
+            font-size: 10px;
+            max-width: 80px;
+            top: 25px;
+            left: 8px;
+            padding: 3px 6px;
+          }
+          
+          .wheel-title {
+            font-size: 1.6rem;
+          }
+          
+          .wheel-subtitle {
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+          }
+          
+          .victory-text {
+            font-size: 1.8rem;
+            padding: 10px 20px;
+          }
+          
+          .audio-toggle, .theme-switcher {
+            width: 36px;
+            height: 36px;
+          }
+        }
+
+        @media (max-width: 360px) {
+          .wheel-container {
+            width: 300px;
+            height: 300px;
+          }
+          
+          .wheel-center {
+            width: 80px;
+            height: 80px;
+          }
+          
+          .segment-text {
+            font-size: 9px;
+            max-width: 70px;
+            top: 22px;
           }
         }
         
@@ -515,7 +580,7 @@ export default function SpinWheel({ prizes = [], onWin, userId = 1 }) {
         
         .segment-text {
           color: white;
-          font-size: 16px;
+          font-size: 14px;
           font-weight: 600;
           transform: rotate(50deg);
           position: relative;
@@ -523,9 +588,9 @@ export default function SpinWheel({ prizes = [], onWin, userId = 1 }) {
           top: 35px;
           text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
           background: rgba(0, 0, 0, 0.2);
-          padding: 6px 10px;
+          padding: 5px 8px;
           border-radius: 10px;
-          max-width: 150px;
+          max-width: 120px;
           text-align: center;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -593,20 +658,20 @@ export default function SpinWheel({ prizes = [], onWin, userId = 1 }) {
         
         .wheel-pointer-container {
           position: absolute;
-          top: -30px;
+          top: -25px;
           left: 50%;
           transform: translateX(-50%);
           z-index: 10;
-          width: 60px;
-          height: 60px;
+          width: 50px;
+          height: 50px;
           display: flex;
           justify-content: center;
           filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
         }
         
         .wheel-pointer {
-          width: 40px;
-          height: 40px;
+          width: 35px;
+          height: 35px;
           background: ${currentTheme.secondary};
           clip-path: polygon(50% 100%, 0 0, 100% 0);
           transition: all 0.3s ease;
