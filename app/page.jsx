@@ -26,6 +26,14 @@ export default function Home() {
   // Set mounted to true after component mounts
   useEffect(() => {
     setMounted(true)
+
+    // Add meta viewport tag for mobile devices
+    if (typeof document !== "undefined") {
+      const meta = document.createElement("meta")
+      meta.name = "viewport"
+      meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      document.getElementsByTagName("head")[0].appendChild(meta)
+    }
   }, [])
 
   // Get user ID from URL query parameter - only run on client
@@ -142,8 +150,11 @@ export default function Home() {
             align-items: center;
             justify-content: center;
             height: 100vh;
+            width: 100%;
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             color: white;
+            padding: 20px;
+            box-sizing: border-box;
           }
           
           .loading-spinner {
@@ -178,12 +189,15 @@ export default function Home() {
       <style jsx>{`
         .main-container {
           min-height: 100vh;
+          width: 100%;
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
           background: linear-gradient(135deg, #1a1a2e, #16213e);
-          padding: 20px;
+          padding: 5px;
+          box-sizing: border-box;
+          overflow-x: hidden;
         }
         
         .error-banner {
@@ -193,8 +207,9 @@ export default function Home() {
           margin-bottom: 20px;
           border-radius: 4px;
           color: white;
-          max-width: 500px;
-          width: 100%;
+          max-width: 100%;
+          width: calc(100% - 20px);
+          box-sizing: border-box;
         }
       `}</style>
     </main>
